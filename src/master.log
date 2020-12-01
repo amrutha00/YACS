@@ -1,28 +1,22 @@
-master_newd.py;least-loaded;Started job with job id 0;2020-12-01 18:28:39,044
-master_newd.py;least-loaded;Started job with job id 1;2020-12-01 18:28:41,370
-master_newd.py;least-loaded;Started job with job id 2;2020-12-01 18:28:41,918
-master_newd.py;least-loaded;Completed task 0_M0 at 2020-12-01 18:28:41.938442 duration 02.010000;2020-12-01 18:28:41,953
-master_newd.py;least-loaded;Started job with job id 3;2020-12-01 18:28:42,321
-master_newd.py;least-loaded;Started job with job id 4;2020-12-01 18:28:42,443
-master_newd.py;least-loaded;Completed task 1_M0 at 2020-12-01 18:28:42.955234 duration 01.040000;2020-12-01 18:28:42,980
-master_newd.py;least-loaded;Completed task 1_M1 at 2020-12-01 18:28:42.971945 duration 01.030000;2020-12-01 18:28:43,007
-master_newd.py;least-loaded;Completed task 4_M0 at 2020-12-01 18:28:43.981316 duration 01.040000;2020-12-01 18:28:44,002
-master_newd.py;least-loaded;Completed task 1_M2 at 2020-12-01 18:28:44.980273 duration 03.060000;2020-12-01 18:28:44,982
-master_newd.py;least-loaded;Completed task 3_M0 at 2020-12-01 18:28:44.981141 duration 02.030000;2020-12-01 18:28:45,001
-master_newd.py;least-loaded;Completed task 2_M1 at 2020-12-01 18:28:44.981748 duration 02.030000;2020-12-01 18:28:45,001
-master_newd.py;least-loaded;Completed task 2_M2 at 2020-12-01 18:28:46.018156 duration 03.070000;2020-12-01 18:28:46,019
-master_newd.py;least-loaded;Completed task 0_R0 at 2020-12-01 18:28:46.992220 duration 04.040000;2020-12-01 18:28:47,014
-master_newd.py;least-loaded;Completed task 1_R0 at 2020-12-01 18:28:46.992737 duration 01;2020-12-01 18:28:47,043
-master_newd.py;least-loaded;Completed task 4_M1 at 2020-12-01 18:28:47.026346 duration 04.090000;2020-12-01 18:28:47,051
-master_newd.py;least-loaded;Completed task 2_M0 at 2020-12-01 18:28:47.026852 duration 04.080000;2020-12-01 18:28:47,051
-master_newd.py;least-loaded;Completed job 0;2020-12-01 18:28:47,050
-master_newd.py;least-loaded;Completed job 1;2020-12-01 18:28:47,051
-master_newd.py;least-loaded;Completed task 3_R1 at 2020-12-01 18:28:48.007353 duration 02.020000;2020-12-01 18:28:48,017
-master_newd.py;least-loaded;Completed task 3_R0 at 2020-12-01 18:28:50.014698 duration 04.020000;2020-12-01 18:28:50,025
-master_newd.py;least-loaded;Completed task 4_R1 at 2020-12-01 18:28:50.015467 duration 02.010000;2020-12-01 18:28:50,043
-master_newd.py;least-loaded;Completed job 3;2020-12-01 18:28:50,051
-master_newd.py;least-loaded;Completed task 2_R1 at 2020-12-01 18:28:51.023035 duration 03.020000;2020-12-01 18:28:51,034
-master_newd.py;least-loaded;Completed task 4_R0 at 2020-12-01 18:28:51.041106 duration 03.020000;2020-12-01 18:28:51,051
-master_newd.py;least-loaded;Completed task 2_R0 at 2020-12-01 18:28:51.041948 duration 03.020000;2020-12-01 18:28:51,069
-master_newd.py;least-loaded;Completed job 4;2020-12-01 18:28:51,069
-master_newd.py;least-loaded;Completed job 2;2020-12-01 18:28:51,070
+master.py;random;Started job with job id 0;2020-12-01 22:03:52,625
+master.py;random;Started job with job id 1;2020-12-01 22:03:53,101
+master.py;random;Started job with job id 2;2020-12-01 22:03:54,012
+master.py;random;Completed task 0_M1 at 2020-12-01 22:03:54.234219 duration 01.010000;2020-12-01 22:03:54,257
+master.py;random;Completed task 0_M0 at 2020-12-01 22:03:55.241832 duration 02.030000;2020-12-01 22:03:55,246
+master.py;random;Completed task 1_M0 at 2020-12-01 22:03:56.228209 duration 03.010000;2020-12-01 22:03:56,233
+master.py;random;Completed task 2_M2 at 2020-12-01 22:03:56.230626 duration 02.020000;2020-12-01 22:03:56,246
+master.py;random;Completed task 2_M0 at 2020-12-01 22:03:57.235833 duration 03.020000;2020-12-01 22:03:57,274
+master.py;random;Completed task 0_R0 at 2020-12-01 22:03:57.237069 duration 01.010000;2020-12-01 22:03:57,297
+master.py;random;Completed job 0;2020-12-01 22:03:57,309
+master.py;random;Completed task 1_M1 at 2020-12-01 22:03:57.251843 duration 04.040000;2020-12-01 22:03:57,344
+master.py;random;Started job with job id 3;2020-12-01 22:03:58,208
+master.py;random;Completed task 2_M1 at 2020-12-01 22:03:58.255443 duration 04.030000;2020-12-01 22:03:58,290
+master.py;random;Completed task 3_M0 at 2020-12-01 22:03:59.261323 duration 01.010000;2020-12-01 22:03:59,277
+master.py;random;Completed task 3_M1 at 2020-12-01 22:04:00.266482 duration 02.010000;2020-12-01 22:04:00,282
+master.py;random;Completed task 1_R0 at 2020-12-01 22:04:01.265353 duration 03.020000;2020-12-01 22:04:01,294
+master.py;random;Completed job 1;2020-12-01 22:04:01,294
+master.py;random;Completed task 3_R0 at 2020-12-01 22:04:02.275957 duration 01;2020-12-01 22:04:02,284
+master.py;random;Completed task 2_R0 at 2020-12-01 22:04:03.277659 duration 04.020000;2020-12-01 22:04:03,306
+master.py;random;Completed task 3_R1 at 2020-12-01 22:04:03.277655 duration 02;2020-12-01 22:04:03,317
+master.py;random;Completed job 2;2020-12-01 22:04:03,317
+master.py;random;Completed job 3;2020-12-01 22:04:03,346

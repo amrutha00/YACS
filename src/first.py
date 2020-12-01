@@ -1,6 +1,8 @@
 from datetime import datetime
 import statistics
 import sys
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
@@ -17,16 +19,16 @@ tempList3=[]
 
 file=open("master.log","r")
 for line in file.readlines():
-  temp=line.split(";")
-  algo=temp[1]
-  temp1=temp[2].split()
-  if(temp1[1]=="task"):
-    if(temp[1]=="random"):
-    	tempList1.append(float(temp1[7]))
-    elif(temp[1]=="round-robin"):
-    	tempList2.append(float(temp1[7]))
-    elif(temp[1]=='least-loaded'):
-    	tempList3.append(float(temp1[7]))
+	temp=line.split(";")
+	algo=temp[1]
+	temp1=temp[2].split()
+	if(temp1[1]=="task"):
+		if(temp[1]=="random"):
+			tempList1.append(float(temp1[7]))
+		elif(temp[1]=="round-robin"):
+			tempList2.append(float(temp1[7]))
+		elif(temp[1]=='least-loaded'):
+			tempList3.append(float(temp1[7]))
 file.close()
 if (tempList1):
 	final_dict['random'][0] = (float(sum(tempList1))/len(tempList1))
@@ -83,6 +85,12 @@ file = open("master.log", "r")
 lines = file.readlines()
 file.close()
 
+
+tempList1=[]
+tempList2=[]
+tempList3=[]
+
+
 for line in lines:
 	temp = line.split(";")
 	a = temp[2].split()
@@ -91,28 +99,51 @@ for line in lines:
 			job_id = a[2][0]
 			if (a[2][2] == 'R'):
 				b = a[4] + " " + a[5]
-				end_times[job_id] = datetime.strptime(b,'%Y-%m-%d %H:%M:%S.%f')
+				end_times[tuple((job_id, temp[1]))] = datetime.strptime(b,'%Y-%m-%d %H:%M:%S.%f')
 	elif (a[0] == 'Started'):
 		job_id = a[-1]
-		start_times[job_id] = datetime.strptime(temp[3][:-2],'%Y-%m-%d %H:%M:%S,%f')
-		algos[job_id] = temp[1]
+		b = a[4] + " " + a[5]
+		start_times[tuple((job_id, temp[1]))] = datetime.strptime(temp[3][:-1],'%Y-%m-%d %H:%M:%S,%f')
+		# algos[tuple((job_id, temp[1]))] = temp[1]
 
 
-jobs = start_times.keys()
+
+
 for job in start_times:
-	if algos[job] not in per_algos:
-		per_algos[algos[job]] = []
-		per_algos[algos[job]].append((end_times[job] - start_times[job]).total_seconds())
-	else:
-		per_algos[algos[job]].append((end_times[job] - start_times[job]).total_seconds())
+	if (job[1] == 'random'):
+		tempList1.append((end_times[job] - start_times[job]).total_seconds())
+	elif (job[1] == 'round-robin'):
+		tempList2.append((end_times[job] - start_times[job]).total_seconds())
+	elif (job[1] == 'least-loaded'):
+		tempList3.append((end_times[job] - start_times[job]).total_seconds())
 
-for algo in per_algos:
-	# print(algo, float(sum(per_algos[algo]))/len(per_algos[algo]), statistics.median(per_algos[algo]))
-	final_dict[algo][2] = float(sum(per_algos[algo]))/len(per_algos[algo])
-	final_dict[algo][3] = statistics.median(per_algos[algo])
+if (tempList1):
+	final_dict['random'][2] = (float(sum(tempList1))/len(tempList1))
+	final_dict['random'][3] = (statistics.median(tempList1))
+if (tempList2):
+	final_dict['round-robin'][2] = (float(sum(tempList2))/len(tempList2))
+	final_dict['round-robin'][3] = (statistics.median(tempList2))
+if (tempList3):
+	final_dict['least-loaded'][2] = (float(sum(tempList3))/len(tempList3))
+	final_dict['least-loaded'][3] = (statistics.median(tempList3))
 
+for i in final_dict:
+	print(final_dict[i])
 
 
 for i in final_dict:
-	print(i,final_dict[i])
+	plt.figure(figsize=(10,6))
+
+	plt.title("Algorithm Used: {}".format(i))
+
+	
+	xx = ['mean_task','median_task','mean_job','median_job']
+	splot = sns.barplot(x=xx, y=final_dict[i])
+	for p in splot.patches:
+		splot.annotate(format(p.get_height(), '.2f'), (p.get_x() + p.get_width() / 2., p.get_height()), ha = 'center', va = 'center', xytext = (0, 10), textcoords = 'offset points')
+
+	plt.ylabel("Time")
+
+
+	plt.show()
 

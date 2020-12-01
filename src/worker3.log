@@ -1,2 +1,4 @@
-worker1d.py;Started task 4_M0;least-loaded;2020-12-01 18:28:42,938
-worker1d.py;Completed task 4_M0;least-loaded;2020-12-01 18:28:43,970
+worker.py;Started task 1_R0;random;2020-12-01 22:03:58,246
+worker.py;Started task 2_R0;random;2020-12-01 22:03:59,251
+worker.py;Completed task 1_R0;random;2020-12-01 22:04:01,260
+worker.py;Completed task 2_R0;random;2020-12-01 22:04:03,277
