@@ -21,9 +21,9 @@ This code sends five job requests to the master. To change the number of jobs, s
 
 ## Submission Files:
 The files required for submission are present in the `src` folder.
-1.master.py
-2.worker.py
-2.analysis.py
+1) master.py
+2) worker.py
+3) analysis.py
 
 ### Note: 
 1) To change the number of workers in the cluster, modify the `start-all.sh` script.
