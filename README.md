@@ -24,6 +24,7 @@ The files required for submission are present in the `src` folder.
 1) master.py
 2) worker.py
 3) analysis.py
+4) BD_0210_0416_1879_2057_report.pdf
 
 ### Note: 
 1) To change the number of workers in the cluster, modify the `start-all.sh` script.
