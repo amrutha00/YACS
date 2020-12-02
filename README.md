@@ -19,8 +19,15 @@ The worker machines listen for tasks from the master, run the given tasks and up
 This code sends five job requests to the master. To change the number of jobs, simply change the number passed as an argument to the requests.py
 3. To stop all the processes, run `end-all.sh`.
 
+## Submission Files:
+The files required for submission are present in the `src` folder.
+1.master.py
+2.worker.py
+2.analysis.py
+
 ### Note: 
-1) To change the number of workers in the cluster, modify the `start-all.sh` script. 
-2) Each worker has its own log, named `worker<worker_id>.log` 
-3) The scheduling algorithm can be changed by modifying the `start-all.sh` script 
-4) To get more insight from the log files, run `python3 analysis.py`. 
+1) To change the number of workers in the cluster, modify the `start-all.sh` script.
+2) To change the port numbers on which the workers listen to, modify the `config.json` and `start-all.sh` scripts.
+3) Each worker has its own log, named `worker<worker_id>.log` 
+4) The scheduling algorithm can be changed by modifying the `start-all.sh` script 
+5) To get more insight from the log files, run `python3 analysis.py`. 
