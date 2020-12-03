@@ -1,14 +1,27 @@
+#Requires the master and worker logs in the local directory or change the path accordingly while trying to read the file
+#TO VIEW THE GRAPHS---navigate to Visualisation directory
+
 from datetime import datetime
 import statistics
 import sys
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import seaborn as sns
 import pandas as pd
 import json
 import time
 
+
+#TASK1
+
 #BAR GRAPH 
 
+#Calculation of mean and median time for tasks
+
+'''
+A dictionary with keys being the algorithm and the value is a list of the format <mean_tasktime,median_tasktime,mean_jobtime,median_jobtime>.
+Only the master.log is analysed to calculate these values
+'''
 
 final_dict=dict()
 final_dict['random']=list((0.0,0.0,0.0,0.0))
@@ -41,7 +54,11 @@ if (tempList2):
 if (tempList3):
     final_dict['least-loaded'][0] = (float(sum(tempList3))/len(tempList3))
     final_dict['least-loaded'][1] = (statistics.median(tempList3))
+    
 '''
+#Analysis can be done on individual workers.
+#The mean and median task time can be calculated per algorithm on every worker by analysing worker logs 
+
 for i in range(1, n + 1):
     file = open("worker" + str(i) + ".log", "r")
     for line in file.readlines():
@@ -59,9 +76,6 @@ for i in range(1, n + 1):
                 tempList3.append(float(str(time_elapsed).split(":")[-1]))
     file.close()
 
-
-
-
 if (tempList1):
     final_dict['random'][0] = (float(sum(tempList1))/len(tempList1))
     final_dict['random'][1] = (statistics.median(tempList1))
@@ -71,11 +85,9 @@ if (tempList2):
 if (tempList3):
     final_dict['least'][0] = (float(sum(tempList3))/len(tempList3))
     final_dict['least'][1] = (statistics.median(tempList3))
-
-
 '''
 
-#------------------------------------------------------------------------
+#Calculation of mean and median time for job
 
 start_times = dict()
 end_times = dict()
@@ -98,8 +110,8 @@ for line in lines:
     a = temp[2].split()
     if (a[0] == 'Completed'):
         if (a[1] == 'task'):
-            job_id = a[2][0]
-            if (a[2][2] == 'R'):
+            job_id = a[2][0:a[2].find('_')]
+            if (a[2][a[2].find('_')+1] == 'R'):
                 b = a[4] + " " + a[5]
                 end_times[tuple((job_id, temp[1]))] = datetime.strptime(b,'%Y-%m-%d %H:%M:%S.%f')
     elif (a[0] == 'Started'):
@@ -145,14 +157,19 @@ for i in final_dict:
         splot.annotate(format(p.get_height(), '.2f'), (p.get_x() + p.get_width() / 2., p.get_height()), ha = 'center', va = 'center', xytext = (0, 10), textcoords = 'offset points')
 
     plt.ylabel("Time")
-
-
+    plt.savefig("Visualisation/Task-1/"+i+".png",bbox_inches='tight')
     plt.show()
 
 
 
 #-------------------------------------------------------------------------------------------------------
+
+#TASK2
+
+
 # HEAT MAP
+#To visualise the number of tasks scheduled on each worker per algorithm during each run
+
 
 file_path=['worker1.log','worker2.log','worker3.log']
 
@@ -177,12 +194,13 @@ plt.figure(figsize=(14,7))
 plt.title("Number of tasks scheduled per worker, algorithm wise")
 sns.heatmap(data=new, annot=True)
 plt.xlabel("Algorithm")
+plt.savefig("Visualisation/Task-2/heatmap.png",bbox_inches='tight')
 plt.show()
 
 
-#-------------------------------------------------------------------------------------------------------
-# STEP CHART
+#STEP-GRAPH
 
+#To visualise the number of running tasks on every worker for every 3 algorithms during each run
 
 file_path=['worker1.log','worker2.log','worker3.log']
 
@@ -226,6 +244,9 @@ for algo in algos:
     plt.xlabel('Time')
     plt.ylabel('Running Tasks')
     plt.legend()
+    sns.set(rc={'figure.figsize':(15,5)})
+    sns.set_style("whitegrid")
+    plt.savefig("Visualisation/Task-2/"+algo+".png",bbox_inches='tight')
     plt.show() 
 
 
