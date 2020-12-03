@@ -31,4 +31,4 @@ The files required for submission are present in the `src` folder.
 2) To change the port numbers on which the workers listen to, modify the `config.json` and `start-all.sh` scripts.
 3) Each worker has its own log, named `worker<worker_id>.log` 
 4) The scheduling algorithm can be changed by modifying the `start-all.sh` script 
-5) To get more insight from the log files, run `python3 analysis.py`. 
+5) To get more insight from the log files, run `python3 analysis.py`.To view the plots,navigate to the `Visualisation` folder.
