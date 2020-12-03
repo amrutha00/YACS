@@ -1,5 +1,7 @@
-#Requires the master and worker logs in the local directory or change the path accordingly while trying to read the file
-#TO VIEW THE GRAPHS---navigate to Visualisation directory.Create the directories Visualisation/Task-1 and Visualisation/Task-2 if they don't exist.
+#!/usr/bin/env python
+
+
+#TO VIEW THE GRAPHS---navigate to the local_files/Visualisation directory
 
 from datetime import datetime
 import statistics
@@ -7,22 +9,22 @@ import sys
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import seaborn as sns
+from datetime import datetime
 import pandas as pd
 import json
 import time
 
+
+from pathlib import Path
+Path("./Visualisation/").mkdir(parents=True, exist_ok=True)
+Path("./Visualisation/Task-2/").mkdir(parents=True, exist_ok=True)
+Path("./Visualisation/Task-1/").mkdir(parents=True, exist_ok=True)
 
 #TASK1
 
 #BAR GRAPH 
 
 #Calculation of mean and median time for tasks
-
-'''
-A dictionary with keys being the algorithm and the value is a list of the format <mean_tasktime,median_tasktime,mean_jobtime,median_jobtime>.
-Only the master.log is analysed to calculate these values
-'''
-
 final_dict=dict()
 final_dict['random']=list((0.0,0.0,0.0,0.0))
 final_dict['round-robin']=list((0.0,0.0,0.0,0.0))
@@ -55,9 +57,10 @@ if (tempList3):
     final_dict['least-loaded'][0] = (float(sum(tempList3))/len(tempList3))
     final_dict['least-loaded'][1] = (statistics.median(tempList3))
     
+    
+
 '''
-#Analysis can be done on individual workers.
-#The mean and median task time can be calculated per algorithm on every worker by analysing worker logs 
+#Analysis can be done on individual workers
 
 for i in range(1, n + 1):
     file = open("worker" + str(i) + ".log", "r")
@@ -76,6 +79,9 @@ for i in range(1, n + 1):
                 tempList3.append(float(str(time_elapsed).split(":")[-1]))
     file.close()
 
+
+
+
 if (tempList1):
     final_dict['random'][0] = (float(sum(tempList1))/len(tempList1))
     final_dict['random'][1] = (statistics.median(tempList1))
@@ -85,7 +91,10 @@ if (tempList2):
 if (tempList3):
     final_dict['least'][0] = (float(sum(tempList3))/len(tempList3))
     final_dict['least'][1] = (statistics.median(tempList3))
+
+
 '''
+
 
 #Calculation of mean and median time for job
 
@@ -158,21 +167,19 @@ for i in final_dict:
 
     plt.ylabel("Time")
     plt.savefig("Visualisation/Task-1/"+i+".png",bbox_inches='tight')
+
     plt.show()
-
-
-
-#-------------------------------------------------------------------------------------------------------
+    
+#--------------------------------------------------------------------------------------------------------------------------
 
 #TASK2
 
 
-# HEAT MAP
+
+#heatmap
 #To visualise the number of tasks scheduled on each worker per algorithm during each run
 
-
 file_path=['worker1.log','worker2.log','worker3.log']
-
 counts = dict()
 counts['random'] = [0, 0, 0]
 counts['round-robin'] = [0, 0, 0]
@@ -191,16 +198,22 @@ new = pd.DataFrame.from_dict(counts)
 new.set_index("workers", inplace = True)
 
 plt.figure(figsize=(14,7))
-plt.title("Number of tasks scheduled per worker, algorithm wise")
-sns.heatmap(data=new, annot=True)
+#ax=sns.heatmap(new,annot=True)
+#bottom, top = ax.get_ylim()
+#ax.set_ylim(bottom-1,top-1)
+
+plt.title("Number of tasks scheduled per worker")
+sns.heatmap(data=new, annot=True,linewidths=.5)
+#plt.figure(figsize = (5,5))
 plt.xlabel("Algorithm")
 plt.savefig("Visualisation/Task-2/heatmap.png",bbox_inches='tight')
 plt.show()
 
 
-#STEP-GRAPH
 
-#To visualise the number of running tasks on every worker for every 3 algorithms during each run
+#step-graph
+
+#To visualise the number of running tasks on every worker for every 3 algorithms for each run
 
 file_path=['worker1.log','worker2.log','worker3.log']
 
@@ -234,20 +247,27 @@ for path in file_path:
 
 
 
+# figure size in inches
+#rcParams['figure.figsize'] = 10,15
+
 
 for algo in algos:
     # plt.figure(figsize=(8,8))
     # plt.xticks(range(min(valueX), max(valueX)+1))
+    plt.title("Algorithm: {}".format(algo))
     for i in range(0,len(file_path)):
         x='worker' +str(i+1)
         plt.step(*zip(*sorted(algos[algo][i].items())),marker='o',color= color[i],label=x, where="post")
     plt.xlabel('Time')
     plt.ylabel('Running Tasks')
-    plt.legend()
     sns.set(rc={'figure.figsize':(15,5)})
     sns.set_style("whitegrid")
+    plt.legend()
     plt.savefig("Visualisation/Task-2/"+algo+".png",bbox_inches='tight')
     plt.show() 
+
+
+
 
 
 
