@@ -257,7 +257,10 @@ for algo in algos:
     plt.title("Algorithm: {}".format(algo))
     for i in range(0,len(file_path)):
         x='worker' +str(i+1)
-        plt.step(*zip(*sorted(algos[algo][i].items())),marker='o',color= color[i],label=x, where="post")
+        try:
+            plt.step(*zip(*sorted(algos[algo][i].items())),marker='o',color= color[i],label=x, where="post")
+        except:
+            pass
     plt.xlabel('Time')
     plt.ylabel('Running Tasks')
     sns.set(rc={'figure.figsize':(15,5)})
