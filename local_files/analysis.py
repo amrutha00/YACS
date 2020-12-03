@@ -14,6 +14,12 @@ import pandas as pd
 import json
 import time
 
+
+from pathlib import Path
+Path("./Visualisation/").mkdir(parents=True, exist_ok=True)
+Path("./Visualisation/Task-2/").mkdir(parents=True, exist_ok=True)
+Path("./Visualisation/Task-1/").mkdir(parents=True, exist_ok=True)
+
 #TASK1
 
 #BAR GRAPH 
@@ -168,6 +174,43 @@ for i in final_dict:
 
 #TASK2
 
+
+
+#heatmap
+#To visualise the number of tasks scheduled on each worker per algorithm during each run
+
+file_path=['worker1.log','worker2.log','worker3.log']
+counts = dict()
+counts['random'] = [0, 0, 0]
+counts['round-robin'] = [0, 0, 0]
+counts['least-loaded'] = [0, 0, 0]
+
+for path in file_path:
+    file = open(path, "r")
+    for line in file.readlines():
+        temp = line.split(";")
+        if (temp[1].split()[0] == 'Started'):
+            counts[temp[2]][int(path[-5]) - 1] += 1
+
+counts['workers'] = ['worker1', 'worker2', 'worker3']
+
+new = pd.DataFrame.from_dict(counts)
+new.set_index("workers", inplace = True)
+
+plt.figure(figsize=(14,7))
+#ax=sns.heatmap(new,annot=True)
+#bottom, top = ax.get_ylim()
+#ax.set_ylim(bottom-1,top-1)
+
+plt.title("Number of tasks scheduled per worker")
+sns.heatmap(data=new, annot=True,linewidths=.5)
+#plt.figure(figsize = (5,5))
+plt.xlabel("Algorithm")
+plt.savefig("Visualisation/Task-2/heatmap.png",bbox_inches='tight')
+plt.show()
+
+
+
 #step-graph
 
 #To visualise the number of running tasks on every worker for every 3 algorithms for each run
@@ -224,38 +267,6 @@ for algo in algos:
     plt.show() 
 
 
-#heatmap
-#To visualise the number of tasks scheduled on each worker per algorithm during each run
-
-file_path=['worker1.log','worker2.log','worker3.log']
-counts = dict()
-counts['random'] = [0, 0, 0]
-counts['round-robin'] = [0, 0, 0]
-counts['least-loaded'] = [0, 0, 0]
-
-for path in file_path:
-    file = open(path, "r")
-    for line in file.readlines():
-        temp = line.split(";")
-        if (temp[1].split()[0] == 'Started'):
-            counts[temp[2]][int(path[-5]) - 1] += 1
-
-counts['workers'] = ['worker1', 'worker2', 'worker3']
-
-new = pd.DataFrame.from_dict(counts)
-new.set_index("workers", inplace = True)
-
-plt.figure(figsize=(14,7))
-#ax=sns.heatmap(new,annot=True)
-#bottom, top = ax.get_ylim()
-#ax.set_ylim(bottom-1,top-1)
-
-plt.title("Number of tasks scheduled per worker")
-sns.heatmap(data=new, annot=True,linewidths=.5)
-#plt.figure(figsize = (5,5))
-plt.xlabel("Algorithm")
-plt.savefig("Visualisation/Task-2/heatmap.png",bbox_inches='tight')
-plt.show()
 
 
 
