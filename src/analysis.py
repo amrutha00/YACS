@@ -1,5 +1,5 @@
 #Requires the master and worker logs in the local directory or change the path accordingly while trying to read the file
-#TO VIEW THE GRAPHS---navigate to Visualisation directory
+#TO VIEW THE GRAPHS---navigate to Visualisation directory.Create the directories Visualisation/Task-1 and Visualisation/Task-2 if they don't exist.
 
 from datetime import datetime
 import statistics
