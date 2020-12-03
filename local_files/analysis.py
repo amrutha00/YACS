@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
 
 
 #TO VIEW THE GRAPHS---navigate to the local_files/Visualisation directory
@@ -261,7 +258,6 @@ plt.savefig("Visualisation/Task-2/heatmap.png",bbox_inches='tight')
 plt.show()
 
 
-# In[ ]:
 
 
 
